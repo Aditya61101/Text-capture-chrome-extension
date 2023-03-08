@@ -1,8 +1,24 @@
 var isInject: boolean = false;
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((reason: any) => {
     console.log('I just installed with new version');
+    if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
+        checkCommandShortcuts();
+    }
 });
+const checkCommandShortcuts = () => {
+    chrome.commands.getAll((commands) => {
+        let missingShortcuts = [];
 
+        for (let { name, shortcut } of commands) {
+            if (shortcut === '') {
+                missingShortcuts.push(name);
+            }
+        }
+        if (missingShortcuts.length > 0) {
+            alert(`You have not set shortcuts for the following commands: ${missingShortcuts.join(', ')}. Please set them in the extension's options page.`);
+        }
+    });
+}
 const stopScript = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { "message": "stop_script" }, (response) => {

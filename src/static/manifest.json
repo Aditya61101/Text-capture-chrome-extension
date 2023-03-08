@@ -3,11 +3,6 @@
   "name": "Text Extractor Extension",
   "description": "Chrome extension for extracting text from an hovered element when you click on it",
   "version": "1.0.0",
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "Text Extractor",
-    "default_icon": "icon-16.png"
-  },
   "icons": {
     "16": "icon-16.png",
     "32": "icon-32.png",
@@ -18,11 +13,16 @@
   "background": {
     "service_worker": "background.js"
   },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Text Extractor",
+    "default_icon": "icon-16.png"
+  },
   "commands": {
     "_execute_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+Y",
-        "mac": "Command+F"
+        "mac": "Command+Y"
       }
     },
     "content-script": {
