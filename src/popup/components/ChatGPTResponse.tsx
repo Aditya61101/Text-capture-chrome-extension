@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { goBack } from 'react-chrome-extension-router';
+import { secret } from './apiSecret';
 
 const ChatGPTResponse = ({ message, system }: any) => {
     const [gptMessage, setGptMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const handleText = async (capturedText: string, systemContent: string) => {
         let url = `https://api.openai.com/v1/chat/completions`;
-        const apiKey = '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';
-        // const apiKey = secrets.ApiKey;
+        const apiKey = secret.ApiKey;
         console.log(apiKey);
         const systemMessage = {
             role: 'system',
